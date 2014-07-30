@@ -13,7 +13,7 @@ WP Review Bank is a hassle free yet Powerful way to leave reviews and rate quick
 
 ### WordPress Review Bank - Best Review & Rating Sytem
 
-WP Review Bank plugin is a hassle free yet Powerful way to leave reviews  and rate quickly and easily. If you occasionally review or rank products, services, tools, recipes, or other content on your sit, then this is for you. 
+WP Review Bank plugin is a hassle free yet Powerful way to leave reviews  and rate quickly and easily. If you occasionally review or rank products, services, tools, recipes, or other content, then this plugin is for you. 
 
 WP Review Bank provides stars, points or percentage rating with unlimited colors combinations & options. 
 
