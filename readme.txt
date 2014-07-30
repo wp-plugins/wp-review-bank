@@ -1,4 +1,4 @@
-﻿=== WP Review Bank ===
+﻿=== WP Review Bank - Best Review & Rating Sytem ===
 Contributors: contact-banker, Gallery-Bank
 Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress
 Requires at least: 3.0
@@ -7,13 +7,21 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP Review Bank is an hassle free way to review content easily.
+WP Review Bank is a hassle free yet Powerful way to leave reviews and rate quickly and easily.
 
 == Description ==
 
-### WordPress Review Bank
+### WordPress Review Bank - Best Review & Rating Sytem
 
-WP Review Bank contains:
+WP Review Bank plugin is a hassle free yet Powerful way to leave reviews  and rate quickly and easily. If you occasionally review or rank products, services, tools, recipes, or other content on your sit, then this is for you. 
+
+WP Review Bank provides stars, points or percentage rating with unlimited colors combinations & options. 
+
+Just install it and follow the simple configuration instructions to place it in your desired location.
+
+###IMPORTANT: If you think you found a bug in WP Mail Bank or have any problem or question concerning WP Mail Bank, do not hesitate to contact us at [support@tech-banker.com](mailto:support@tech-banker.com).  
+
+###Key Features :
 
 * Streamlined code for optimized plugin performance
 * Simple instructions
