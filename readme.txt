@@ -2,7 +2,7 @@
 Contributors: contact-banker, Gallery-Bank
 Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress
 Requires at least: 3.0
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ WP Review Bank provides stars, points or percentage rating with unlimited colors
 
 Just install it and follow the simple configuration instructions to place it in your desired location.
 
-***August 7, 2014: We're happy to announce that WP Review Bank reached 100+ plugin downloads in only 1 week. We frequently receive positive feedback from people using our WP Review Bank Plugin for WordPress. Thanks so much for your support!***
+***August 11, 2014: We're happy to announce that WP Review Bank reached 150+ plugin downloads in only 1 week. We frequently receive positive feedback from people using our WP Review Bank Plugin for WordPress. Thanks so much for your support!***
 
 ###IMPORTANT: If you think you found a bug in WP Review Bank or have any problem or question concerning WP Review Bank, do not hesitate to contact us at [support@tech-banker.com](mailto:support@tech-banker.com).  
 
