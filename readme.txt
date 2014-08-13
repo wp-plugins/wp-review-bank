@@ -1,6 +1,6 @@
 ﻿=== WP Review Bank - Best Review & Rating Sytem ===
 Contributors: contact-banker, Gallery-Bank
-Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress
+Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress, ratings, google
 Requires at least: 3.0
 Tested up to: 3.9.2
 Stable tag: 1.0
