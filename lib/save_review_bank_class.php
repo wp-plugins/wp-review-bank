@@ -61,7 +61,7 @@ else
 			$review_bank = array();
 			$review_bank["id"]= intval($_REQUEST["review_id"]);
 			$review_bank["review_type"]= esc_attr($_REQUEST["ux_ddl_review_type"]);
-			$review_bank["heading"]= esc_attr($_REQUEST["ux_txt_heading"]);
+			$review_bank["heading"]= htmlspecialchars_decode(esc_attr($_REQUEST["heading"]));
 			$review_bank["description"]= esc_html($_REQUEST["ux_wprb_description"]);
 			$review_bank["review_color"]= esc_attr($_REQUEST["ux_clr_text_color_input_field"]);
 			$review_bank["font_color"]= esc_attr($_REQUEST["ux_txt_font_color"]);

@@ -36,7 +36,7 @@ if($last_form_id > 0)
 	</style>
 	
 	<div id="review " class="wp-review-bank-wrapper body_clr">
-	<h5 class="wp-review-bank-title heading_bg_clr bg_clr" sty><?php echo $review->heading;?></h5>
+	<h5 class="wp-review-bank-title heading_bg_clr bg_clr" sty><?php echo stripcslashes(htmlspecialchars_decode($review->heading));?></h5>
 	<div class="wp-review-bank-desc font_clr" style="float:left;">
 	<p class="wp-review-bank-summary-title">
 		<strong class="font_clr">Summary</strong>
@@ -44,9 +44,34 @@ if($last_form_id > 0)
 	</div>
 	<div class="wp-review-bank-desc_total" style="float:right;">
 	<?php 
+		if(PHP_VERSION < 5.4)
+		{
 			if($review->review_type == 1)
 			{
+				?>
+				<span class="wp-review-bank-total-box " itemprop="review"><?php echo round( $review->total, 2);?>/<?php echo $review->maximum_val;?></span>
+			<?php
+			}
+			else if($review->review_type == 2)
+			{
 			?>
+				<span class="wp-review-bank-total-box " itemprop="review"><?php echo round( $review->total, 2);?>/<?php echo $review->maximum_val;?></span>
+			<?php
+			}
+			else
+			{
+				$total = explode(".",$review->total);
+				$total_val = $total[1] == "00" ? $total[0] :$review->total;
+			?>
+				<span class="wp-review-bank-total-box" itemprop="review"><?php echo round($total_val, 2);?>%</span>
+			<?php
+			}
+		}
+		else
+		{
+			if($review->review_type == 1)
+			{
+				?>
 				<span class="wp-review-bank-total-box " itemprop="review"><?php echo round( $review->total, 1, PHP_ROUND_HALF_UP);?>/<?php echo $review->maximum_val;?></span>
 			<?php
 			}
@@ -64,6 +89,8 @@ if($last_form_id > 0)
 				<span class="wp-review-bank-total-box" itemprop="review"><?php echo round($total_val, 1, PHP_ROUND_HALF_UP);?>%</span>
 			<?php
 			}
+		}
+			
 		?>
 		</div>
 	<?php 
@@ -113,6 +140,22 @@ if($last_form_id > 0)
 				</style>
 				<div id="review" class="wp-review-bank-wrapper  bar-point ">
 					<ul class="wp-review-bank-list">
+					<?php 
+					if(PHP_VERSION < 5.4)
+					{	
+					?>
+						<li><span><?php echo esc_attr(stripcslashes(htmlspecialchars($review_details[$flag]->feature)));?> (<?php echo round($review_details[$flag]->points, 2) ."/". $review->maximum_val;?>)</span>
+							<div class="wp-review-bank-star">
+								<div class="wp-review-bank-result-wrapper">
+									<div class="wp-review-bank-result" style="color:<?php echo $review->review_color;?>; width:<?php echo $review_details[$flag]->points * 100 / $review->maximum_val ."%";?>;"></div>
+								</div>
+							</div>
+						</li>
+					<?php 
+					}
+					else
+					{
+						?>
 						<li><span><?php echo esc_attr(stripcslashes(htmlspecialchars($review_details[$flag]->feature)));?> (<?php echo round($review_details[$flag]->points, 1, PHP_ROUND_HALF_UP) ."/". $review->maximum_val;?>)</span>
 							<div class="wp-review-bank-star">
 								<div class="wp-review-bank-result-wrapper">
@@ -120,6 +163,9 @@ if($last_form_id > 0)
 								</div>
 							</div>
 						</li>
+					<?php 
+					}
+					?>
 					</ul>
 				</div>
 				
@@ -136,6 +182,22 @@ if($last_form_id > 0)
 				</style>
 				<div id="review" class="wp-review-bank-wrapper bar-point">
 					<ul class="wp-review-bank-list">
+					<?php 
+					if(PHP_VERSION < 5.4)
+					{	
+					?>
+						<li><span><?php echo esc_attr(stripcslashes(htmlspecialchars($review_details[$flag]->feature)));?> (<?php echo round($review_details[$flag]->points,2) ."%";?>)</span>
+							<div class="wp-review-bank-star">
+								<div class="wp-review-bank-result-wrapper">
+									<div class="wp-review-bank-result" style="color:<?php echo $review->review_color;?>; width:<?php echo $review_details[$flag]->points * 100 / $review->maximum_val ."%";?>;"></div>
+								</div>
+							</div>
+						</li>
+						<?php 
+					}
+					else
+					{
+						?>
 						<li><span><?php echo esc_attr(stripcslashes(htmlspecialchars($review_details[$flag]->feature)));?> (<?php echo round($review_details[$flag]->points, 1, PHP_ROUND_HALF_UP) ."%";?>)</span>
 							<div class="wp-review-bank-star">
 								<div class="wp-review-bank-result-wrapper">
@@ -143,6 +205,9 @@ if($last_form_id > 0)
 								</div>
 							</div>
 						</li>
+						<?php 
+					}	
+					?>
 					</ul>
 				</div>
 				<?php 

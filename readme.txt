@@ -2,12 +2,12 @@
 Contributors: contact-banker, Gallery-Bank
 Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress, ratings, google
 Requires at least: 3.0
-Tested up to: 3.9.2
-Stable tag: 1.0
+Tested up to: 4.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP Review Bank is a hassle free yet Powerful way to leave reviews and rate quickly and easily.
+WP Review Bank helps to Create reviews! Choose from Stars, Percentages or Points for review scores with Unlimited Color Schemes.
 
 == Description ==
 
@@ -28,6 +28,13 @@ Just install it and follow the simple configuration instructions to place it in 
 * Streamlined code for optimized plugin performance
 * Simple instructions
 * Stars, Percentage and Point Rating System.
+* Fastest review plugin.
+* 100% Fluid Responsive.
+* Option to change individual review Colors and Positions.
+* Design it as you want, unlimited color options.
+* Minimal design but could be instantly made modern.
+* Works with caching plugins and all majority of themes.
+* Easy to modify the CSS to better fit your theme style.
 
 == Installation ==
 
@@ -54,5 +61,11 @@ If any problem occurs, please contact us at [support@tech-banker.com](mailto:sup
 
 == Changelog ==
 
+= 1.1 =
+
+* Light Weight CSS Framework
+* Fixed Bugs with PHP Version Prior to 5.3
+* Added System Status
+
 = 1.0 =
-Initial Release
+* Initial Release

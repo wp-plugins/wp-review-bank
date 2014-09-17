@@ -47,7 +47,7 @@ else
 	<form id="ux_frm_review" class="layout-form wpib-page-width">
 		<div class="fluid-layout">
 			<div class="layout-span12">
-				<div class="widget-layout wpib-body-background">
+				<div class="widget-layout ">
 					<div class="widget-layout-title">
 						<h4>
 							<?php
@@ -66,225 +66,206 @@ else
 					<div class="widget-layout-body">
 						<a class="btn btn-success" href="admin.php?page=dashboard_review" style="margin-bottom:4px;"><?php _e("Back to Dashboard", review_bank);?></a>
 						<input type="submit" class="btn btn-success" style="margin-bottom:4px; float:right" value="<?php _e("Save Changes", review_bank);?>" />
-						<div class="wpib-separator-doubled"></div>
-						<div id=form_success_message class="message green" style="display: none;">
-							<span>
+							<div class="separator-doubled" style="padding: 6px ;"></div>
+							<div id=form_success_message class="message green" style="display: none; margin-bottom:8px;">
+							<span >
 								<strong><?php _e("Reviews Submitted. Kindly wait for the redirect.", review_bank); ?></strong>
 							</span>
 						</div>
-						<div class="fluid-layout">
-							<div class="layout-span12">
-								<div class="widget-layout">
-									<div class="widget-layout-title">
-									<h4><?php
-										if(isset($_REQUEST["review_id"]))
-										{
-											_e("Update Review - WP Review Bank", review_bank);
-										}
-										else 
-										{
-											_e("Add New Review - WP Review Bank", review_bank);
-											
-										}
-										 ?></h4>
+						<div class="widget-layout">
+							<div class="widget-layout-title">
+							<h4><?php
+								if(isset($_REQUEST["review_id"]))
+								{
+									_e("Update Review - WP Review Bank", review_bank);
+								}
+								else 
+								{
+									_e("Add New Review - WP Review Bank", review_bank);
+									
+								}
+								 ?></h4>
+							</div>
+							<div class="widget-layout-body">
+								<div class="layout-control-group">
+									<label class="layout-control-label"><?php _e("Review Type", review_bank); ?> : <span class="error">*</span> </label>
+									<div class="layout-controls">
+										<select class="layout-span12" onchange="change_value_set();" name="ux_ddl_review_type" id="ux_ddl_review_type">
+											<option value="1" <?php echo (isset($review_data) && $review_data->review_type == "1") ? "selected" : ""?>>
+											<?php _e( "Star", review_bank ); ?></option>
+											<option value="2" <?php echo (isset($review_data) && $review_data->review_type == "2") ? "selected" : ""?>>
+											<?php _e( "Point", review_bank ); ?></option>
+											<option value="3" <?php echo (isset($review_data) && $review_data->review_type == "3") ? "selected" : ""?>>
+											<?php _e( "Percentage", review_bank ); ?></option>
+										</select>
 									</div>
-									<div class="widget-layout-body">
-										<div class="fluid-layout">
-											<div class="layout-control-group">
-												<label class="wp-layout-control-label"><?php _e("Review Type", review_bank); ?> : <span class="error">*</span> </label>
-												<div class="wp-layout-controls">
-													<select class="layout-span12" onchange="change_value_set();" name="ux_ddl_review_type" id="ux_ddl_review_type">
-														<option value="1" <?php echo (isset($review_data) && $review_data->review_type == "1") ? "selected" : ""?>>
-														<?php _e( "Star", review_bank ); ?></option>
-														<option value="2" <?php echo (isset($review_data) && $review_data->review_type == "2") ? "selected" : ""?>>
-														<?php _e( "Point", review_bank ); ?></option>
-														<option value="3" <?php echo (isset($review_data) && $review_data->review_type == "3") ? "selected" : ""?>>
-														<?php _e( "Percentage", review_bank ); ?></option>
-													</select>
-												</div>
-											</div>
+								</div>
+								<div class="layout-control-group">
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Minimum", review_bank); ?> : <span class="error">*</span> </label>
+										<div class="layout-controls">
+											<input type="text" id="ux_txt_min_value" onkeypress="return OnlyNumbers(event)" 
+												 onblur="change_points_value();" name="ux_txt_min_value" 
+												class="layout-span12" placeholder="Enter Minimum Value" 
+												value="<?php echo isset($review_data) ? $review_data->minimum_val : "";?>"/>
 										</div>
-										<div class="fluid-layout">
-											<div class="layout-span6">
-												<div class="layout-control-group">
-													<label class="wp-layout-control-label"><?php _e("Minimum", review_bank); ?> : <span class="error">*</span> </label>
-													<div class="wp-layout-controls">
-														<input type="text" id="ux_txt_min_value" onkeypress="return OnlyNumbers(event)" 
-															 onblur="change_points_value();" name="ux_txt_min_value" 
-															class="layout-span12" placeholder="Enter Minimum Value" 
-															value="<?php echo isset($review_data) ? $review_data->minimum_val : "";?>"/>
-													</div>
-												</div>
-											</div>
-											<div class="layout-span6">
-												<div class="layout-control-group">
-													<label class="wp-layout-control-label"><?php _e("Maximum", review_bank); ?> : <span class="error">*</span> </label>
-													<div class="wp-layout-controls">
-														<input type="text" id="ux_txt_max_value"
-														 onkeypress="return OnlyNumbers(event)" onblur="change_points_value();" 
-														 name="ux_txt_max_value" class="layout-span12" placeholder="Enter Maximum value" 
-														 value="<?php echo isset($review_data) ? $review_data->maximum_val : "";?>"/>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="fluid-layout">
-											<div class="layout-control-group">
-												<label class="wp-layout-control-label"><?php _e("Heading", review_bank); ?> : <span class="error">*</span> </label>
-												<div class="wp-layout-controls">
-													<input type="text" id="ux_txt_heading" name="ux_txt_heading" class="layout-span12" placeholder="" 
-													value="<?php echo isset($review_data) ? $review_data->heading : "";?>"/>
-												</div>
-											</div>
-											<div class="layout-control-group">
-												<label class="wp-layout-control-label"><?php _e("Description", review_bank); ?> : </label>
-												<div class="wp-layout-controls">
-												<div class="layout-span12 wpib-margin-top-bottom">
-												<?php
-													$distribution = isset($review_data) ? esc_attr(stripcslashes(htmlspecialchars($review_data->description))) : "";
-													wp_editor( $distribution, $name ="ux_wprb_description" ,array("media_buttons" => false, 
-													"textarea_rows" => 8, "tabindex" => 4,"tinymce" =>false )); 
-												?>
-												</div>
-												</div>
-											</div>
-										</div>
-										<div class="fluid-layout">
-											<div class="layout-span4">
-												<div class="layout-control-group">
-													<label class="wprb-layout-control-label"><?php _e("Review Color", review_bank); ?> : </label>
-													<div class="wprb-layout-controls">
-														<input type="text" class="layout-span10" id="ux_clr_text_color_input_field" 
-															name="ux_clr_text_color_input_field" onclick="ux_clr_font_color_input_settings();"
-															 value="<?php echo isset($review_data) ? $review_data->review_color : "#e3e32b";?>"  
-															 style="background-color:<?php echo isset($review_data) ? $review_data->review_color : "#e3e32b";?>;color:#fff;"/>
-															 <img onclick="ux_clr_font_color_input_settings();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
-														<div id="clr_text_color"></div>
-													</div>
-												</div>
-											</div>
-											<div class="layout-span4">
-												<div class="layout-control-group">
-													<label class="wprb-layout-control-label"><?php _e("Font Color", review_bank); ?> : </label>
-													<div class="wprb-layout-controls">
-														<input type="text" class="layout-span10" name="ux_txt_font_color" id="ux_txt_font_color"  onclick="ux_clr_font_color();"
-															value="<?php echo isset($review_data) ? $review_data->font_color : "#000000";?>"  
-															style="background-color:<?php echo isset($review_data) ? $review_data->font_color : "#000000";?>;color:#fff;"/>
-															<img onclick="ux_clr_font_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
-														<div id="clr_font_color"></div>
-													</div>
-												</div>
-											</div>
-											<div class="layout-span4">
-												<div class="layout-control-group">
-													<label class="wprb-layout-control-label"><?php _e("Heading Color", review_bank); ?> : </label>
-													<div class="wprb-layout-controls">
-														<input type="text" class="layout-span10" name="ux_txt_heading_font_color" 
-														id="ux_txt_heading_font_color"  onclick="ux_clr_heading_color();" 
-														value="<?php echo isset($review_data) ? $review_data->heading_background_color : "#fa0000";?>"  
-														style="background-color:<?php echo isset($review_data) ? $review_data->heading_background_color : "#fa0000";?>;color:#fff;"/>
-														<img onclick="ux_clr_heading_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
-														<div id="clr_heading_font_color"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="fluid-layout">
-											<div class="layout-span4">
-												<div class="layout-control-group">
-													<label class="wprb-layout-control-label"><?php _e("Heading BG Color", review_bank); ?> : </label>
-													<div class="wprb-layout-controls">
-															<input type="text" class="layout-span10" id="ux_clr_background_color_input_field" 
-															name="ux_clr_background_color_input_field" onclick="ux_clr_background_color_input_settings();" 
-															value="<?php echo isset($review_data) ? $review_data->background_color : "#e5e5e5";?>"  
-															style="background-color:<?php echo isset($review_data) ? $review_data->background_color : "#e5e5e5";?>;color:#ffffff;"/>
-															<img onclick="ux_clr_background_color_input_settings();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
-															<div id="clr_background_color"></div>
-													</div>
-												</div>
-											</div>
-											<div class="layout-span4">
-												<div class="layout-control-group">
-													<label class="wprb-layout-control-label"><?php _e("Body Color", review_bank); ?> : </label>
-													<div class="wprb-layout-controls">
-														<input type="text" class="layout-span10" name="ux_txt_body_color" id="ux_txt_body_color"  
-														onclick="ux_clr_body_color();" 
-														value="<?php echo isset($review_data) ? $review_data->body_color : "#ffffff";?>"  
-														style="background-color:<?php echo isset($review_data) ? $review_data->body_color : "#ffffff";?>;color:#000000;"/>
-														<img onclick="ux_clr_body_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
-														<div id="clr_body_color"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="fluid-layout">
-											<table class=" wpib-tbl-backgound" style="width:100%;border:1px solid #e5e5e5">
-												<thead>
-													<tr style="padding:3px;">
-														<td>
-															<table style="width:100%;">
-																<th style="width:70%;text-align:left; padding:3px 3px 3px 13px;">List of Features</th>
-																<th style="width:18%;text-align: left; padding:3px 3px 3px 10px;" id="change_points">Points (0-10)</th>
-																<th style="width:8%;padding:3px;"></th>
-															</table>
-														</td>
-													</tr>
-												</thead>
-												<tbody id="add_another_item">
-												<?php 
-												if(isset($review_features))
-												{
-													for($flag=0;$flag<count($review_features);$flag++)
-													{
-														$dynamic_id = $flag;
-														
-														?>
-														<tr id="<?php echo $dynamic_id;?>" style="cursor:move;" >
-														<td style="padding:1px 15px;">
-																<table style="width:100%;border:0.152em dashed #dddddd;margin:5px 0px;">
-																	<tr>
-																		<td style="width:70%;padding:9px 3px 1px 5px;">
-																			<input type="text" style="margin-bottom: 7px;" class="layout-span12" 
-																			id="ux_txt_list_features_<?php echo $dynamic_id;?>" name="ux_txt_list_features_<?php echo $dynamic_id;?>" 
-																			value="<?php echo isset($review_features) ? esc_attr(stripcslashes(htmlspecialchars($review_features[$flag]->feature))) : "";?>"/>
-																		</td>
-																		<td style="width:18%;padding:9px 3px 1px 5px;">
-																			<input type="text" class="layout-span12" style="margin-bottom: 7px;" 
-																				onkeypress="return OnlyDigits(event);" onblur="OnlyNumbers_total(<?php echo $dynamic_id;?>);"
-																			 id="ux_txt_points_<?php echo $dynamic_id;?>" name="ux_txt_points_<?php echo $dynamic_id;?>" 
-																			 value="<?php echo isset($review_features) ? $review_features[$flag]->points : "";?>"/>
-																		</td>
-																		<td style="padding:2px 15px;width:8%;">
-																			<input type="button" id="delete_item_<?php echo $dynamic_id;?>"  class="btn btn-success" onclick="delete_features(<?php echo $dynamic_id;?>);" name="delete_item_<?php echo $dynamic_id;?>"" value="Delete"/>
-																		</td>
-																	</tr>
-																</table>
-															</td>
-														</tr>
-														<?php
-													}
-												}
-												?>
-												</tbody>
-											</table>
-										</div>
-										<div class="fluid-layout">
-											<div class="layout-span8">
-												<input type="button" id="ux_add_another_item" name="ux_add_another_item " class="btn btn-success" onclick="add_another_item();" value="Add Another Item">
-											</div>
-											<div class="layout-span4" id="ux_total_points">
-											<input type"text" style="border: 1px solid #dddddd;margin-left:8%;width: 53%;" 
-												readonly="readonly" class="layout-span6" id="ux_txt_total"name="ux_txt_total"
-												 value="<?php echo isset($review_data) ? $review_data->total : "0.00";?>">
-											<label style="margin-left:25px;font-weight:bold;"><?php _e("Total", review_bank); ?></label>
-											</div >
+									</div>
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Maximum", review_bank); ?> : <span class="error">*</span> </label>
+										<div class="layout-controls">
+											<input type="text" id="ux_txt_max_value"
+											 onkeypress="return OnlyNumbers(event)" onblur="change_points_value();" 
+											 name="ux_txt_max_value" class="layout-span12" placeholder="Enter Maximum value" 
+											 value="<?php echo isset($review_data) ? $review_data->maximum_val : "";?>"/>
 										</div>
 									</div>
 								</div>
+								<div class="layout-control-group">
+									<label class="layout-control-label"><?php _e("Heading", review_bank); ?> : <span class="error">*</span> </label>
+									<div class="layout-controls">
+										<input type="text" id="ux_txt_heading" name="ux_txt_heading" class="layout-span12" placeholder="" 
+										value="<?php echo isset($review_data) ? stripcslashes(htmlspecialchars_decode($review_data->heading )) : "";?>"/>
+									</div>
+								</div>
+								<div class="layout-control-group">
+									<label class="layout-control-label"><?php _e("Description", review_bank); ?> : </label>
+									<div class="layout-controls">
+									<div class="layout-span12 wpib-margin-top-bottom">
+									<?php
+										$distribution = isset($review_data) ? esc_attr(stripcslashes(htmlspecialchars($review_data->description))) : "";
+										wp_editor( $distribution, $name ="ux_wprb_description" ,array("media_buttons" => false, 
+										"textarea_rows" => 8, "tabindex" => 4,"tinymce" =>false )); 
+									?>
+									</div>
+									</div>
+								</div>
+								<div class="layout-control-group">
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Review Color", review_bank); ?> : </label>
+										<div class="layout-controls">
+											<input type="text" class="layout-span9" id="ux_clr_text_color_input_field" 
+												name="ux_clr_text_color_input_field" onclick="ux_clr_font_color_input_settings();"
+												 value="<?php echo isset($review_data) ? $review_data->review_color : "#e3e32b";?>"  
+												 style="background-color:<?php echo isset($review_data) ? $review_data->review_color : "#e3e32b";?>;color:#fff;"/>
+												 <img onclick="ux_clr_font_color_input_settings();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
+											<div id="clr_text_color"></div>
+										</div>
+									</div>
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Font Color", review_bank); ?> : </label>
+										<div class="layout-controls">
+											<input type="text" class="layout-span9" name="ux_txt_font_color" id="ux_txt_font_color"  onclick="ux_clr_font_color();"
+												value="<?php echo isset($review_data) ? $review_data->font_color : "#000000";?>"  
+												style="background-color:<?php echo isset($review_data) ? $review_data->font_color : "#000000";?>;color:#fff;"/>
+												<img onclick="ux_clr_font_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
+											<div id="clr_font_color"></div>
+										</div>
+									</div>
+								</div>
+								<div class="layout-control-group">
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Heading Color", review_bank); ?> : </label>
+										<div class="layout-controls">
+											<input type="text" class="layout-span9" name="ux_txt_heading_font_color" 
+											id="ux_txt_heading_font_color"  onclick="ux_clr_heading_color();" 
+											value="<?php echo isset($review_data) ? $review_data->heading_background_color : "#fa0000";?>"  
+											style="background-color:<?php echo isset($review_data) ? $review_data->heading_background_color : "#fa0000";?>;color:#fff;"/>
+											<img onclick="ux_clr_heading_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
+											<div id="clr_heading_font_color"></div>
+										</div>	
+									</div>
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Heading BG Color", review_bank); ?> : </label>
+										<div class="layout-controls">
+												<input type="text" class="layout-span9" id="ux_clr_background_color_input_field" 
+												name="ux_clr_background_color_input_field" onclick="ux_clr_background_color_input_settings();" 
+												value="<?php echo isset($review_data) ? $review_data->background_color : "#e5e5e5";?>"  
+												style="background-color:<?php echo isset($review_data) ? $review_data->background_color : "#e5e5e5";?>;color:#ffffff;"/>
+												<img onclick="ux_clr_background_color_input_settings();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
+												<div id="clr_background_color"></div>
+										</div>
+									</div>
+								</div>
+								<div class="layout-control-group">
+									<div class="layout-span6">
+										<label class="layout-control-label"><?php _e("Body Color", review_bank); ?> : </label>
+										<div class="layout-controls">
+											<input type="text" class="layout-span9" name="ux_txt_body_color" id="ux_txt_body_color"  
+											onclick="ux_clr_body_color();" 
+											value="<?php echo isset($review_data) ? $review_data->body_color : "#ffffff";?>"  
+											style="background-color:<?php echo isset($review_data) ? $review_data->body_color : "#ffffff";?>;color:#000000;"/>
+											<img onclick="ux_clr_body_color();" style="vertical-align: middle;margin-left: 5px;" src="<?php echo plugins_url("/assets/images/color.png" , dirname(__FILE__)); ?>" />
+											<div id="clr_body_color"></div>
+										</div>
+									</div>
+								</div>
+								<div class="layout-control-group">
+									<table class="widefat" style="width:100%;border:1px solid #e5e5e5; background-color:#fff !important"">
+										<thead>
+											<tr style="padding:3px;">
+												<td>
+													<table style="width:100%;">
+														<th style="width:70%;text-align:left;">List of Features</th>
+														<th style="width:18%;text-align: left;" id="change_points">Points (0-10)</th>
+														<th style="width:8%;padding:3px;"></th>
+													</table>
+												</td>
+											</tr>
+										</thead>
+										<tbody id="add_another_item">
+										<?php 
+										if(isset($review_features))
+										{
+											for($flag=0;$flag<count($review_features);$flag++)
+											{
+												$dynamic_id = $flag;
+												$alternate = $dynamic_id % 2 == 0 ? "alternate" : "";
+												?>
+												<tr id="<?php echo $dynamic_id;?>" class="<?php echo $alternate;?>" style="cursor:move;">
+													<td style="padding:1px 15px;">
+														<table style="width:100%;border:0.152em dashed #dddddd;margin:5px 0px;">
+															<tr>
+																<td style="width:70%;padding:9px 3px 1px 5px;">
+																	<input type="text" style="margin-bottom: 7px;" class="layout-span12" 
+																	id="ux_txt_list_features_<?php echo $dynamic_id;?>" name="ux_txt_list_features_<?php echo $dynamic_id;?>" 
+																	value="<?php echo isset($review_features) ? esc_attr(stripcslashes(htmlspecialchars($review_features[$flag]->feature))) : "";?>"/>
+																</td>
+																<td style="width:18%;padding:9px 3px 1px 5px;">
+																	<input type="text" class="layout-span12" style="margin-bottom: 7px;" 
+																		onkeypress="return OnlyDigits(event);" onblur="OnlyNumbers_total(<?php echo $dynamic_id;?>);"
+																	 id="ux_txt_points_<?php echo $dynamic_id;?>" name="ux_txt_points_<?php echo $dynamic_id;?>" 
+																	 value="<?php echo isset($review_features) ? $review_features[$flag]->points : "";?>"/>
+																</td>
+																<td style="padding:7px 15px;width:8%;">
+																	<input type="button" id="delete_item_<?php echo $dynamic_id;?>"  class="btn btn-success" onclick="delete_features(<?php echo $dynamic_id;?>);" name="delete_item_<?php echo $dynamic_id;?>"" value="Delete"/>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<?php
+											}
+										}
+										?>
+										</tbody>
+									</table>
+								</div>
+								<div class="layout-control-group">
+									<div class="layout-span8">
+										<input type="button" id="ux_add_another_item" name="ux_add_another_item " class="btn btn-success" onclick="add_another_item();" value="Add Another Item">
+									</div>
+									<div class="layout-span4" id="ux_total_points">
+									<input type"text" style="border: 1px solid #dddddd;margin-left:8%;width: 53%;" 
+										readonly="readonly" class="layout-span8" id="ux_txt_total"name="ux_txt_total"
+										 value="<?php echo isset($review_data) ? $review_data->total : "0.00";?>">
+									<label style="margin-left:25px;font-weight:bold;"><?php _e("Total", review_bank); ?></label>
+									</div>
+								</div>
 							</div>
-							<a class="btn btn-success" href="admin.php?page=dashboard_review" style="margin-bottom:4px;"><?php _e("Back to Dashboard", review_bank);?></a>
-							<input type="submit" class="btn btn-success" style="margin-bottom:4px; float:right" value="<?php _e("Save Changes", review_bank);?>" />
 						</div>
+						<div class="separator-doubled" style="padding: 3px 0px 6px 0px;"></div>
+						<a class="btn btn-success" href="admin.php?page=dashboard_review" style="margin-bottom:4px;"><?php _e("Back to Dashboard", review_bank);?></a>
+						<input type="submit" class="btn btn-success" style="margin-bottom:4px; float:right" value="<?php _e("Save Changes", review_bank);?>" />
 					</div>
 				</div>
 			</div>
@@ -358,7 +339,8 @@ else
 	function add_another_item()
 	{
 		var dynamicid= sort_id;
-		jQuery("#add_another_item").append("<tr style=\"cursor:move;\" id="+dynamicid+"><td style=\"padding:1px 15px;\"><table style=\"width:100%;border:0.152em dashed #dddddd;margin:5px 0px;\"><tr><td style=\"width:70%;padding:9px 3px 1px 5px;\"><input type=\"text\" style=\"margin-bottom: 7px;\" class=\"layout-span12\" id=\"ux_txt_list_features_"+dynamicid+"\" name=\"ux_txt_list_features_"+dynamicid+"\" value=\"\"/></td><td style=\"width:18%;padding:9px 3px 1px 5px;\"><input type=\"text\" class=\"layout-span12\" style=\"margin-bottom: 7px;\" onkeypress=\"return OnlyDigits(event);\" onblur=\"OnlyNumbers_total("+dynamicid+");\" id=\"ux_txt_points_"+dynamicid+"\" name=\"ux_txt_points_"+dynamicid+"\" value=\"\"/></td><td style=\"padding:2px 15px;width:8%;\"><input type=\"button\" id=\"delete_item_"+dynamicid+"\"  class=\"btn btn-success\" onclick=\"delete_features("+dynamicid+");\" name=\"delete_item_"+dynamicid+"\" value=\"Delete\"/></td></tr></table></td></tr>");
+		alternate = dynamicid % 2 == 0 ? "alternate" : "";
+		jQuery("#add_another_item").append("<tr class="+alternate+" style=\"cursor:move;\" id="+dynamicid+"><td style=\"padding:1px 15px;\"><table style=\"width:100%;border:0.152em dashed #dddddd;margin:5px 0px;\"><tr><td style=\"width:70%;padding:9px 3px 1px 5px;\"><input type=\"text\" style=\"margin-bottom: 7px;\" class=\"layout-span12\" id=\"ux_txt_list_features_"+dynamicid+"\" name=\"ux_txt_list_features_"+dynamicid+"\" value=\"\"/></td><td style=\"width:18%;padding:9px 3px 1px 5px;\"><input type=\"text\" class=\"layout-span12\" style=\"margin-bottom: 7px;\" onkeypress=\"return OnlyDigits(event);\" onblur=\"OnlyNumbers_total("+dynamicid+");\" id=\"ux_txt_points_"+dynamicid+"\" name=\"ux_txt_points_"+dynamicid+"\" value=\"\"/></td><td style=\"padding:7px 15px;width:8%;\"><input type=\"button\" id=\"delete_item_"+dynamicid+"\"  class=\"btn btn-success\" onclick=\"delete_features("+dynamicid+");\" name=\"delete_item_"+dynamicid+"\" value=\"Delete\"/></td></tr></table></td></tr>");
 		
 		features_dynamic_id.push(dynamicid);
 		jQuery("#ux_total_points").css("display","block");
@@ -417,16 +399,23 @@ else
 		},
 		submitHandler: function(form)
 		{
+			var heading= encodeURIComponent(jQuery("#ux_txt_heading").val());
+			jQuery("body").css("opacity",".5");
+			var overlay = jQuery("<div class=\"processing_overlay\"></div>");
+			jQuery("body").append(overlay);
+			
 			jQuery("#form_success_message").css("display","block");
 			jQuery("body,html").animate({
 			scrollTop: jQuery("body,html").position().top}, "slow");
 			var review_id = "<?php echo $review_id;?>";
 			var check = "<?php echo isset($_REQUEST["review_id"]) ? "edit" : "add";?>";
-			jQuery.post(ajaxurl,jQuery(form).serialize()+"&features_dynamic_id="+JSON.stringify(features_dynamic_id)+"&review_id="+review_id+"&check="+check+"&sorting_id="+order+"&param=review_bank&action=review_bank_library", function(data) 
+			jQuery.post(ajaxurl,jQuery(form).serialize()+"&features_dynamic_id="+JSON.stringify(features_dynamic_id)+"&review_id="+review_id+"&heading="+heading+"&check="+check+"&sorting_id="+order+"&param=review_bank&action=review_bank_library", function(data) 
 			{
 				setTimeout(function()
 				{
 					jQuery("#form_success_message").css("display","none");
+					jQuery(".processing_overlay").remove();
+					jQuery("body").css("opacity","1");
 					window.location.href = "admin.php?page=dashboard_review";
 				}, 2000);
 	 		});

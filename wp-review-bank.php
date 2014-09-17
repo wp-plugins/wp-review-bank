@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: 
 Author: Tech Banker
-Version: 1.0
+Version: 1.1
 Author URI: http://tech-banker.com
  */
 
@@ -26,8 +26,9 @@ function frontend_plugin_css_styles_review_bank()
 function backend_plugin_css_styles_review_bank()
 {
 	wp_enqueue_style("farbtastic");
-	wp_enqueue_style("wprb-stylesheet", plugins_url("/assets/css/wprb-stylesheet.css",__FILE__));
 	wp_enqueue_style("system-message", plugins_url("/assets/css/system-message.css",__FILE__));
+	wp_enqueue_style("framework.css", plugins_url("/assets/css/framework.css",__FILE__));
+	wp_enqueue_style("wprb-review.css", plugins_url("/assets/css/wprb-review.css",__FILE__));
 }
 function backend_plugin_js_review_bank()
 {
@@ -117,13 +118,109 @@ function add_review_mce_popup()
 	$wprb_role = $current_user->role[0];
 	include REVIEW_FRM_PLUGIN_DIR."/lib/wprb-shortcode.php";
 }
+/////////////////////////////////////admin menu /////////////////////////////////////
 
+function add_review_icon($meta = TRUE)
+{
+	global $wp_admin_bar,$wpdb,$current_user;
+	$wprb_role = $wpdb->prefix . "capabilities";
+	$current_user->role = array_keys($current_user->$wprb_role);
+	$wprb_role = $current_user->role[0];
+	if (!is_user_logged_in())
+	{
+		return;
+	}
+	switch ($wprb_role)
+	{
+		case "administrator":
+			$wp_admin_bar->add_menu(array(
+			"id" => "review_bank",
+			"title" => __("<img src=\"" . plugins_url("/assets/images/icon.png",__FILE__)."\" width=\"25\"
+			height=\"25\" style=\"vertical-align:text-top; margin-right:5px;\" />WP Review Bank"),
+			"href" => __(site_url() . "/wp-admin/admin.php?page=dashboard_review"),
+			));
 
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Dashboard",
+					"href" => site_url() . "/wp-admin/admin.php?page=dashboard_review",
+					"title" => __("Dashboard", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Add New Review",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank",
+					"title" => __("Add New Review", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "review_bank_system_status",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank_system_status",
+					"title" => __("System Status", review_bank))
+			);
+			break;
+		case "editor":
+			$wp_admin_bar->add_menu(array(
+			"id" => "review_bank",
+			"title" => __("<img src=\"" . plugins_url("/assets/images/icon.png",__FILE__)."\" width=\"25\"
+			height=\"25\" style=\"vertical-align:text-top; margin-right:5px;\" />WP Review Bank"),
+			"href" => __(site_url() . "/wp-admin/admin.php?page=dashboard_review"),
+			));
+
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Dashboard",
+					"href" => site_url() . "/wp-admin/admin.php?page=dashboard_review",
+					"title" => __("Dashboard", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Add New Review",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank",
+					"title" => __("Add New Review", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "review_bank_system_status",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank_system_status",
+					"title" => __("System Status", review_bank))
+			);
+			break;
+		case "author":
+			$wp_admin_bar->add_menu(array(
+			"id" => "review_bank",
+			"title" => __("<img src=\"" . plugins_url("/assets/images/icon.png",__FILE__)."\" width=\"25\"
+			height=\"25\" style=\"vertical-align:text-top; margin-right:5px;\" />WP Review Bank"),
+			"href" => __(site_url() . "/wp-admin/admin.php?page=dashboard_review"),
+			));
+
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Dashboard",
+					"href" => site_url() . "/wp-admin/admin.php?page=dashboard_review",
+					"title" => __("Dashboard", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "Add New Review",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank",
+					"title" => __("Add New Review", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "review_bank_system_status",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_bank_system_status",
+					"title" => __("System Status", review_bank))
+			);
+			break;
+	}
+}
 ///////////////////////////////////  Call Hooks   /////////////////////////////////////////////////////
 
 register_activation_hook(__FILE__,"plugin_install_script_for_review_bank");
+add_action("admin_bar_menu", "add_review_icon",100);
 add_shortcode("review_bank", "review_bank_short_code");
-add_action("init","frontend_plugin_css_styles_review_bank");
+add_action("wp_head","frontend_plugin_css_styles_review_bank");
 add_action("admin_init","backend_plugin_js_review_bank");
 add_action("admin_init","backend_plugin_css_styles_review_bank");
 add_action("admin_menu","create_global_menus_for_review_bank");
