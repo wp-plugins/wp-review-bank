@@ -195,6 +195,12 @@ function add_review_icon($meta = TRUE)
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
+					"id" => "short code review",
+					"href" => site_url() . "/wp-admin/admin.php?page=short_code_review",
+					"title" => __("Short Codes", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
 					"id" => "recommended_review",
 					"href" => site_url() . "/wp-admin/admin.php?page=recommended_plugins_review",
 					"title" => __("Recommendations", review_bank))
@@ -234,6 +240,12 @@ function add_review_icon($meta = TRUE)
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
+					"id" => "short code review",
+					"href" => site_url() . "/wp-admin/admin.php?page=short_code_review",
+					"title" => __("Short Codes", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
 					"id" => "recommended_review",
 					"href" => site_url() . "/wp-admin/admin.php?page=recommended_plugins_review",
 					"title" => __("Recommendations", review_bank))
@@ -270,6 +282,12 @@ function add_review_icon($meta = TRUE)
 					"id" => "Add New Review",
 					"href" => site_url() . "/wp-admin/admin.php?page=review_bank",
 					"title" => __("Add New Review", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "short code review",
+					"href" => site_url() . "/wp-admin/admin.php?page=short_code_review",
+					"title" => __("Short Codes", review_bank))
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",

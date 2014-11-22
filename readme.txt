@@ -19,8 +19,6 @@ WP Review Bank provides stars, points or percentage rating with unlimited colors
 
 Just install it and follow the simple configuration instructions to place it in your desired location.
 
-***August 18, 2014: We're happy to announce that WP Review Bank reached 250+ plugin downloads in only 1 week. We frequently receive positive feedback from people using our WP Review Bank Plugin for WordPress. Thanks so much for your support!***
-
 ###IMPORTANT: If you think you found a bug in WP Review Bank or have any problem or question concerning WP Review Bank, do not hesitate to contact us at [support@tech-banker.com](mailto:support@tech-banker.com).  
 
 ### Key Features :
