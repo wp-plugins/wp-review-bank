@@ -431,7 +431,6 @@ else
 			}
 			return o;
 		};
-	
 		jQuery("a.system-report").click(function () {
 			var report = "";
 			jQuery(".layout-span6 .widget-layout").each(function () {

@@ -2,8 +2,8 @@
 Contributors: contact-banker, Gallery-Bank
 Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress, ratings, google
 Requires at least: 3.0
-Tested up to: 4.0
-Stable tag: 1.1
+Tested up to: 4.0.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ Just install it and follow the simple configuration instructions to place it in 
 
 ###IMPORTANT: If you think you found a bug in WP Review Bank or have any problem or question concerning WP Review Bank, do not hesitate to contact us at [support@tech-banker.com](mailto:support@tech-banker.com).  
 
-###Key Features :
+### Key Features :
 
 * Streamlined code for optimized plugin performance
 * Simple instructions
@@ -60,6 +60,14 @@ After downloading the ZIP file,
 If any problem occurs, please contact us at [support@tech-banker.com](mailto:support@tech-banker.com).
 
 == Changelog ==
+
+= 1.2 =
+
+* Multisite Compatibility Added.
+* Added Compatibility with 4.0.1 WordPress
+* Added Recommended Section 
+* Added Other Services Section 
+* Added Update Message for New Version 
 
 = 1.1 =
 

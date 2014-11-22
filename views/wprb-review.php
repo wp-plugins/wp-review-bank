@@ -17,7 +17,6 @@ if (!current_user_can($user_role_permission))
 }
 else
 { 
-	
 	if(isset($_REQUEST["review_id"]))
 	{
 		$review_id = $_REQUEST["review_id"];
@@ -306,7 +305,6 @@ else
 			cursor: "move",
 			update: function()
 			{
-				
 				order = jQuery("#add_another_item").sortable("toArray");
 			}
 		});
@@ -341,7 +339,6 @@ else
 		var dynamicid= sort_id;
 		alternate = dynamicid % 2 == 0 ? "alternate" : "";
 		jQuery("#add_another_item").append("<tr class="+alternate+" style=\"cursor:move;\" id="+dynamicid+"><td style=\"padding:1px 15px;\"><table style=\"width:100%;border:0.152em dashed #dddddd;margin:5px 0px;\"><tr><td style=\"width:70%;padding:9px 3px 1px 5px;\"><input type=\"text\" style=\"margin-bottom: 7px;\" class=\"layout-span12\" id=\"ux_txt_list_features_"+dynamicid+"\" name=\"ux_txt_list_features_"+dynamicid+"\" value=\"\"/></td><td style=\"width:18%;padding:9px 3px 1px 5px;\"><input type=\"text\" class=\"layout-span12\" style=\"margin-bottom: 7px;\" onkeypress=\"return OnlyDigits(event);\" onblur=\"OnlyNumbers_total("+dynamicid+");\" id=\"ux_txt_points_"+dynamicid+"\" name=\"ux_txt_points_"+dynamicid+"\" value=\"\"/></td><td style=\"padding:7px 15px;width:8%;\"><input type=\"button\" id=\"delete_item_"+dynamicid+"\"  class=\"btn btn-success\" onclick=\"delete_features("+dynamicid+");\" name=\"delete_item_"+dynamicid+"\" value=\"Delete\"/></td></tr></table></td></tr>");
-		
 		features_dynamic_id.push(dynamicid);
 		jQuery("#ux_total_points").css("display","block");
 		sort_id++;
@@ -355,7 +352,6 @@ else
 			var amoun_control = jQuery("#ux_txt_points_"+features_dynamic_id[flag]).val();
 			total+=parseFloat(amoun_control) || 0;
 		}
-		
 		var review_type = jQuery("#ux_ddl_review_type").val();
 		if(review_type == 1 || review_type == 2)
 		{
@@ -368,8 +364,6 @@ else
 			var final_rate = ((total / features_dynamic_id.length)/maximum_type) * 100;
 			jQuery("#ux_txt_total").val(final_rate.toFixed(2));
 		}
-				
-		
 	}
 	jQuery("#ux_clr_text_color_input_field").blur(function(){jQuery("#clr_text_color").slideUp()});
 	jQuery("#ux_txt_font_color").blur(function(){jQuery("#clr_font_color").slideUp()});
@@ -428,7 +422,6 @@ else
 		var maximum_type = jQuery("#ux_txt_max_value").val();
 		if(review_type == 1)
 		{
-			
 			if(minimum_type < 10)
 			{
 				if(maximum_type < minimum_type)
@@ -534,7 +527,6 @@ else
 	}
 	function OnlyDigits(e) ///////////////////////////////////allow only digits
 	{
-		
 		var regex = new RegExp("^[0-9.\b]*$");
 		var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
 		if (regex.test(str))
@@ -546,7 +538,6 @@ else
 	}
 	function OnlyNumbers(e) ///////////////////////////////////allow only digits
 	{
-		
 		var regex = new RegExp("^[0-9\b]*$");
 		var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
 		if (regex.test(str))

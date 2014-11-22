@@ -51,7 +51,6 @@ else
 			global $wpdb;
 			$wpdb->update(wp_review_tbl,$features_review_total,$where_review_total);
 		}
-		
 	}
 	if(isset($_REQUEST["param"]))
 	{
@@ -82,7 +81,6 @@ else
 			{
 				$sorting=json_decode($_REQUEST["features_dynamic_id"]);
 			}
-			
 			$features_review_total=array();
 			$features_review_total["total"]= $_REQUEST["ux_txt_total"];
 			$features_review_total["no_of_features"]= count($features_dynamicid);

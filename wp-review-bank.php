@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: 
 Author: Tech Banker
-Version: 1.1
+Version: 1.2
 Author URI: http://tech-banker.com
  */
 
@@ -12,6 +12,8 @@ Author URI: http://tech-banker.com
 
 if (!defined("REVIEW_FRM_PLUGIN_DIR")) define("REVIEW_FRM_PLUGIN_DIR",  plugin_dir_path( __FILE__ ));
 if (!defined("review_bank")) define("review_bank", "review_bank");
+if (!defined("tech_bank")) define("tech_bank", "tech-banker");
+if (!defined("REVIEW_FILE")) define("REVIEW_FILE","wp-review-bank/wp-review-bank.php");
 
 /////////////////////////////////////  Call CSS & JS Scripts - Front End ////////////////////////////////////////
 
@@ -26,7 +28,6 @@ function frontend_plugin_css_styles_review_bank()
 function backend_plugin_css_styles_review_bank()
 {
 	wp_enqueue_style("farbtastic");
-	wp_enqueue_style("system-message", plugins_url("/assets/css/system-message.css",__FILE__));
 	wp_enqueue_style("framework.css", plugins_url("/assets/css/framework.css",__FILE__));
 	wp_enqueue_style("wprb-review.css", plugins_url("/assets/css/wprb-review.css",__FILE__));
 }
@@ -45,12 +46,31 @@ if(!defined("wp_review_tbl")) define("wp_review_tbl","wp_review_bank");
 if(!defined("wp_review_tbl_features")) define("wp_review_tbl_features","wp_review_features");
 
 /////////////////////////////////////  Call Install Script on Plugin Activation ////////////////////////////////////////
-
-function plugin_install_script_for_review_bank()
+if(!function_exists("plugin_install_script_for_review_bank"))
 {
-	if(file_exists(REVIEW_FRM_PLUGIN_DIR ."/lib/install-script.php"))
+	function plugin_install_script_for_review_bank()
 	{
-		include_once REVIEW_FRM_PLUGIN_DIR ."/lib/install-script.php";
+		global $wpdb;
+		if (is_multisite())
+		{
+			$blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			foreach($blog_ids as $blog_id)
+			{
+				switch_to_blog($blog_id);
+				if(file_exists(REVIEW_FRM_PLUGIN_DIR. "/lib/install-script.php"))
+				{
+					include REVIEW_FRM_PLUGIN_DIR. "/lib/install-script.php";
+				}
+				restore_current_blog();
+			}
+		}
+		else
+		{
+			if(file_exists(REVIEW_FRM_PLUGIN_DIR. "/lib/install-script.php"))
+			{
+				include REVIEW_FRM_PLUGIN_DIR. "/lib/install-script.php";
+			}
+		}
 	}
 }
 
@@ -80,7 +100,18 @@ function wprb_extract_short_code($review_id,$show_title)
 
 function create_global_menus_for_review_bank()
 {
-	include_once REVIEW_FRM_PLUGIN_DIR . "/lib/wprb-include-menus.php";
+	global $wp_admin_bar, $wpdb, $current_user;
+	if(is_super_admin())
+	{
+		$wprb_role = "administrator";
+	}
+	else
+	{
+		$wprb_role = $wpdb->prefix . "capabilities";
+		$current_user->role = array_keys($current_user->$wprb_role);
+		$wprb_role = $current_user->role[0];
+	}
+	include REVIEW_FRM_PLUGIN_DIR . "/lib/wprb-include-menus.php";
 }
 
 ///////////////////////////////////// Register Ajax Based Functions /////////////////////////////////////
@@ -113,22 +144,32 @@ function add_review_mce_popup()
 {
 	add_thickbox();
 	global $wpdb,$current_user,$user_role_permission;
-	$wprb_role = $wpdb->prefix . "capabilities";
-	$current_user->role = array_keys($current_user->$wprb_role);
-	$wprb_role = $current_user->role[0];
+	if(is_super_admin())
+	{
+		$wprb_role = "administrator";
+	}
+	else
+	{
+		$wprb_role = $wpdb->prefix . "capabilities";
+		$current_user->role = array_keys($current_user->$wprb_role);
+		$wprb_role = $current_user->role[0];
+	}
 	include REVIEW_FRM_PLUGIN_DIR."/lib/wprb-shortcode.php";
 }
 /////////////////////////////////////admin menu /////////////////////////////////////
 
 function add_review_icon($meta = TRUE)
 {
-	global $wp_admin_bar,$wpdb,$current_user;
-	$wprb_role = $wpdb->prefix . "capabilities";
-	$current_user->role = array_keys($current_user->$wprb_role);
-	$wprb_role = $current_user->role[0];
-	if (!is_user_logged_in())
+	global $wp_admin_bar, $wpdb, $current_user;
+	if(is_super_admin())
 	{
-		return;
+		$wprb_role = "administrator";
+	}
+	else
+	{
+		$wprb_role = $wpdb->prefix . "capabilities";
+		$current_user->role = array_keys($current_user->$wprb_role);
+		$wprb_role = $current_user->role[0];
 	}
 	switch ($wprb_role)
 	{
@@ -151,6 +192,18 @@ function add_review_icon($meta = TRUE)
 					"id" => "Add New Review",
 					"href" => site_url() . "/wp-admin/admin.php?page=review_bank",
 					"title" => __("Add New Review", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "recommended_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=recommended_plugins_review",
+					"title" => __("Recommendations", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "other_services_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=other_services_review",
+					"title" => __("Our Other Services", review_bank))
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
@@ -181,6 +234,18 @@ function add_review_icon($meta = TRUE)
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
+					"id" => "recommended_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=recommended_plugins_review",
+					"title" => __("Recommendations", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "other services_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=other_services_review",
+					"title" => __("Our Other Services", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
 					"id" => "review_bank_system_status",
 					"href" => site_url() . "/wp-admin/admin.php?page=review_bank_system_status",
 					"title" => __("System Status", review_bank))
@@ -208,6 +273,18 @@ function add_review_icon($meta = TRUE)
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
+					"id" => "recommended_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=recommended_plugins_review",
+					"title" => __("Recommendations", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
+					"id" => "other_services_review",
+					"href" => site_url() . "/wp-admin/admin.php?page=other_services_review",
+					"title" => __("Our Other Services", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
 					"id" => "review_bank_system_status",
 					"href" => site_url() . "/wp-admin/admin.php?page=review_bank_system_status",
 					"title" => __("System Status", review_bank))
@@ -215,9 +292,31 @@ function add_review_icon($meta = TRUE)
 			break;
 	}
 }
+
+function review_bank_plugin_update_message($args)
+{
+	$response = wp_remote_get( 'http://plugins.svn.wordpress.org/wp-review-bank/trunk/readme.txt' );
+	if ( ! is_wp_error( $response ) && ! empty( $response['body'] ) )
+	{
+		// Output Upgrade Notice
+		$matches        = null;
+		$regexp         = '~==\s*Changelog\s*==\s*=\s*[0-9.]+\s*=(.*)(=\s*' . preg_quote($args['Version']) . '\s*=|$)~Uis';
+		$upgrade_notice = '';
+		if ( preg_match( $regexp, $response['body'], $matches ) ) {
+			$changelog = (array) preg_split('~[\r\n]+~', trim($matches[1]));
+			$upgrade_notice .= '<div class="framework_plugin_message">';
+			foreach ( $changelog as $index => $line ) {
+				$upgrade_notice .= "<p>".$line."</p>";
+			}
+			$upgrade_notice .= '</div> ';
+			echo $upgrade_notice;
+		}
+	}
+}
 ///////////////////////////////////  Call Hooks   /////////////////////////////////////////////////////
 
 register_activation_hook(__FILE__,"plugin_install_script_for_review_bank");
+add_action("network_admin_menu", "create_global_menus_for_review_bank" );
 add_action("admin_bar_menu", "add_review_icon",100);
 add_shortcode("review_bank", "review_bank_short_code");
 add_action("wp_head","frontend_plugin_css_styles_review_bank");
@@ -226,3 +325,4 @@ add_action("admin_init","backend_plugin_css_styles_review_bank");
 add_action("admin_menu","create_global_menus_for_review_bank");
 add_action( "media_buttons_context", "add_review_shortcode_button", 1);
 add_action("admin_footer","add_review_mce_popup");
+add_action("in_plugin_update_message-".REVIEW_FILE,"review_bank_plugin_update_message" );

@@ -18,7 +18,6 @@ if (!current_user_can($user_role_permission))
 }
 else
 {
-	
 	$review_details = $wpdb->get_results
 	(
 		"SELECT "
@@ -148,7 +147,6 @@ else
 	});
 	function bulk_delete()
 	{
-		
 		if(jQuery("#ux_ddl_bulk_action").val() == "1")
 		{
 			var confirm_delete =  confirm("<?php _e( "Are you sure, you want to delete these Reviews ?", review_bank ); ?>");
