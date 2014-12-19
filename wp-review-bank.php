@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: 
 Author: Tech Banker
-Version: 1.2
+Version: 1.3
 Author URI: http://tech-banker.com
  */
 
@@ -19,11 +19,9 @@ if (!defined("REVIEW_FILE")) define("REVIEW_FILE","wp-review-bank/wp-review-bank
 
 function frontend_plugin_css_styles_review_bank()
 {
-
 	wp_enqueue_style("wprb-forntend.css",  plugins_url("/assets/css/wprb-forntend.css",__FILE__));
 	wp_enqueue_style("wprb-review.css", plugins_url("/assets/css/wprb-review.css",__FILE__));
 }
-
 /////////////////////////////////////  Call CSS & JS Scripts - Back End ////////////////////////////////////////
 function backend_plugin_css_styles_review_bank()
 {
@@ -341,6 +339,6 @@ add_action("wp_head","frontend_plugin_css_styles_review_bank");
 add_action("admin_init","backend_plugin_js_review_bank");
 add_action("admin_init","backend_plugin_css_styles_review_bank");
 add_action("admin_menu","create_global_menus_for_review_bank");
-add_action( "media_buttons_context", "add_review_shortcode_button", 1);
+add_action("media_buttons_context", "add_review_shortcode_button", 1);
 add_action("admin_footer","add_review_mce_popup");
 add_action("in_plugin_update_message-".REVIEW_FILE,"review_bank_plugin_update_message" );
