@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: 
 Author: Tech Banker
-Version: 1.4
+Version: 1.5
 Author URI: http://tech-banker.com
  */
 

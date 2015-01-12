@@ -40,7 +40,7 @@ if($last_form_id > 0)
 	<div class="wp-review-bank-desc font_clr" style="float:left;">
 	<p class="wp-review-bank-summary-title">
 		<strong class="font_clr">Summary</strong>
-		<p class="font_clr"><?php echo esc_html($review->description);?></p></p>
+		<p class="font_clr"><?php echo stripslashes(htmlspecialchars_decode($review->description, ENT_QUOTES));?></p></p>
 	</div>
 	<div class="wp-review-bank-desc_total" style="float:right;">
 	<?php 
@@ -215,11 +215,7 @@ if($last_form_id > 0)
 		}
 		?>
 		<div id="review" class="wp-review-bank-wrapper bar-point">
-			
-			
-			
 			<div itemscope="itemscope" itemtype="http://data-vocabulary.org/Review"></div>
-			
 		</div>
 	</div>
 		<?php 

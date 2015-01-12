@@ -123,7 +123,7 @@ else
 									<label class="layout-control-label"><?php _e("Heading", review_bank); ?> : <span class="error">*</span> </label>
 									<div class="layout-controls">
 										<input type="text" id="ux_txt_heading" name="ux_txt_heading" class="layout-span12" placeholder="" 
-										value="<?php echo isset($review_data) ? stripcslashes(htmlspecialchars_decode($review_data->heading )) : "";?>"/>
+										value="<?php echo isset($review_data) ? stripcslashes($review_data->heading) : "";?>"/>
 									</div>
 								</div>
 								<div class="layout-control-group">
@@ -131,7 +131,7 @@ else
 									<div class="layout-controls">
 									<div class="layout-span12 wpib-margin-top-bottom">
 									<?php
-										$distribution = isset($review_data) ? esc_attr(stripcslashes(htmlspecialchars($review_data->description))) : "";
+										$distribution = isset($review_data) ? stripcslashes(htmlspecialchars_decode($review_data->description, ENT_QUOTES)) : "";
 										wp_editor( $distribution, $name ="ux_wprb_description" ,array("media_buttons" => false, 
 										"textarea_rows" => 8, "tabindex" => 4,"tinymce" =>false )); 
 									?>
