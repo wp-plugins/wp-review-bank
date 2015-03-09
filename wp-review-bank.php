@@ -2,9 +2,9 @@
 /**
 Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
-Description: 
+Description: WP Review Bank helps to Create reviews! Choose from Stars, Percentages or Points for review scores with Unlimited Color Schemes.
 Author: Tech Banker
-Version: 1.7
+Version: 1.8
 Author URI: http://tech-banker.com
  */
 
@@ -124,7 +124,7 @@ if(isset($_REQUEST["action"]))
 			{
 				include REVIEW_FRM_PLUGIN_DIR."/lib/save_review_bank_class.php";
 			}
-			break;
+		break;
 	}
 }
 
@@ -134,7 +134,7 @@ if(isset($_REQUEST["action"]))
 function add_review_shortcode_button($context) {
 	add_thickbox();
 	$context .= "<a href=\"#TB_inline?width=300&height=400&inlineId=review-bank\"  class=\"button thickbox\"  title=\"" . __("Add Review Bank Shortcode", review_bank) . "\">
-    <span class=\"review_icon\"></span> Add review Bank Form</a>";
+	<span class=\"review_icon\"></span> Add review Bank Form</a>";
 	return $context;
 }
 
