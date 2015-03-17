@@ -3,7 +3,7 @@ Contributors: contact-banker, Gallery-Bank
 Tags: product review, rating, review, star rating, percentage rating, admin, ajax, plugin, post, posts, comments, widgets, wordpress, ratings, google
 Requires at least: 3.0
 Tested up to: 4.1.1
-Stable tag: 1.8
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ After downloading the ZIP file,
 If any problem occurs, please contact us at [support@tech-banker.com](mailto:support@tech-banker.com).
 
 == Changelog ==
+
+= 1.9 =
+
+* Minor Bugs Fixed.
+* Plugin updates Section Updated.
 
 = 1.8 =
 

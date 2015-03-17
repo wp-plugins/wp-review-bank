@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: WP Review Bank helps to Create reviews! Choose from Stars, Percentages or Points for review scores with Unlimited Color Schemes.
 Author: Tech Banker
-Version: 1.8
+Version: 1.9
 Author URI: http://tech-banker.com
  */
 
@@ -193,6 +193,12 @@ function add_review_icon($meta = TRUE)
 			);
 			$wp_admin_bar->add_menu(array(
 					"parent" => "review_bank",
+					"id" => "Plugin Updates",
+					"href" => site_url() . "/wp-admin/admin.php?page=review_plugin_update",
+					"title" => __("Plugin Updates", review_bank))
+			);
+			$wp_admin_bar->add_menu(array(
+					"parent" => "review_bank",
 					"id" => "short code review",
 					"href" => site_url() . "/wp-admin/admin.php?page=short_code_review",
 					"title" => __("Short Codes", review_bank))
@@ -327,6 +333,41 @@ function review_bank_plugin_update_message($args)
 			$upgrade_notice .= '</div> ';
 			echo $upgrade_notice;
 		}
+	}
+}
+
+$is_option_auto_update = get_option("review-bank-automatic-update");
+
+if($is_option_auto_update == "" || $is_option_auto_update == "1")
+{
+	if (!wp_next_scheduled("review_bank_auto_update"))
+	{
+		wp_schedule_event(time(), "daily", "review_bank_auto_update");
+	}
+	add_action("review_bank_auto_update", "review_plugin_autoUpdate");
+}
+else
+{
+	wp_clear_scheduled_hook("review_bank_auto_update");
+}
+function review_plugin_autoUpdate()
+{
+	try
+	{
+		require_once(ABSPATH . "wp-admin/includes/class-wp-upgrader.php");
+		require_once(ABSPATH . "wp-admin/includes/misc.php");
+		define("FS_METHOD", "direct");
+		require_once(ABSPATH . "wp-includes/update.php");
+		require_once(ABSPATH . "wp-admin/includes/file.php");
+		wp_update_plugins();
+		ob_start();
+		$plugin_upgrader = new Plugin_Upgrader();
+		$plugin_upgrader->upgrade("wp-review-bank/wp-review-bank.php");
+		$output = @ob_get_contents();
+		@ob_end_clean();
+	}
+	catch(Exception $e)
+	{
 	}
 }
 ///////////////////////////////////  Call Hooks   /////////////////////////////////////////////////////

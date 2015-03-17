@@ -49,3 +49,4 @@ if(count($wpdb->get_var("SHOW TABLES LIKE '" .wp_review_tbl_features."'")) == 0)
 {
 	create_table_features();
 }
+update_option("review-bank-automatic-update",1);

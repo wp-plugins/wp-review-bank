@@ -239,6 +239,16 @@ else
 																			</a>
 																		<?php 
 																	break;
+																	case "wp-backup-bank":
+																		?>
+																			<a class="plugin-div-button install-now button" href="http://tech-banker.com/products/wp-backup-bank/pricing/" target="_blank" >
+																				<?php _e("Premium Editions", tech_bank); ?>
+																			</a>
+																			<a class="plugin-div-button install-now button" href="http://tech-banker.com/products/wp-backup-bank/" target="_blank" >
+																				<?php _e("Visit Website", tech_bank); ?>
+																			</a>
+																		<?php
+																	break;
 																}
 															?>
 														</li>

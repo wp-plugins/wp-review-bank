@@ -152,6 +152,12 @@ else
 			);
 			die();
 		}
+		else if($_REQUEST["param"] == "review_plugin_updates")
+		{
+			$review_updates = intval($_REQUEST["review_updates"]);
+			update_option("review-bank-automatic-update",$review_updates);
+			die();
+		}
 	}
 }
 ?>
