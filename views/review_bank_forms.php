@@ -36,11 +36,12 @@ if($last_form_id > 0)
 	</style>
 	
 	<div id="review " class="wp-review-bank-wrapper body_clr">
-	<h5 class="wp-review-bank-title heading_bg_clr bg_clr" sty><?php echo stripcslashes(htmlspecialchars_decode($review->heading));?></h5>
+	<h5 class="wp-review-bank-title heading_bg_clr bg_clr"><?php echo stripcslashes(htmlspecialchars_decode($review->heading));?></h5>
 	<div class="wp-review-bank-desc font_clr" style="float:left;">
 	<p class="wp-review-bank-summary-title">
 		<strong class="font_clr">Summary</strong>
-		<p class="font_clr"><?php echo stripslashes(htmlspecialchars_decode($review->description, ENT_QUOTES));?></p></p>
+		<p class="font_clr"><?php echo stripslashes(htmlspecialchars_decode($review->description, ENT_QUOTES));?></p>
+	</p>
 	</div>
 	<div class="wp-review-bank-desc_total" style="float:right;">
 	<?php 

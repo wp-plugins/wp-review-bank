@@ -199,7 +199,7 @@ else
 									</div>
 								</div>
 								<div class="layout-control-group">
-									<table class="widefat" style="width:100%;border:1px solid #e5e5e5; background-color:#fff !important"">
+									<table class="widefat" style="width:100%;border:1px solid #e5e5e5; background-color:#fff !important">
 										<thead>
 											<tr style="padding:3px;">
 												<td>
@@ -236,7 +236,7 @@ else
 																	 value="<?php echo isset($review_features) ? $review_features[$flag]->points : "";?>"/>
 																</td>
 																<td style="padding:7px 15px;width:8%;">
-																	<input type="button" id="delete_item_<?php echo $dynamic_id;?>"  class="btn btn-success" onclick="delete_features(<?php echo $dynamic_id;?>);" name="delete_item_<?php echo $dynamic_id;?>"" value="Delete"/>
+																	<input type="button" id="delete_item_<?php echo $dynamic_id;?>"  class="btn btn-success" onclick="delete_features(<?php echo $dynamic_id;?>);" name="delete_item_<?php echo $dynamic_id;?>" value="Delete"/>
 																</td>
 															</tr>
 														</table>
@@ -254,7 +254,7 @@ else
 										<input type="button" id="ux_add_another_item" name="ux_add_another_item " class="btn btn-success" onclick="add_another_item();" value="Add Another Item">
 									</div>
 									<div class="layout-span4" id="ux_total_points">
-									<input type"text" style="border: 1px solid #dddddd;margin-left:8%;width: 53%;" 
+									<input type="text" style="border: 1px solid #dddddd;margin-left:8%;width: 53%;" 
 										readonly="readonly" class="layout-span8" id="ux_txt_total"name="ux_txt_total"
 										 value="<?php echo isset($review_data) ? $review_data->total : "0.00";?>">
 									<label style="margin-left:25px;font-weight:bold;"><?php _e("Total", review_bank); ?></label>

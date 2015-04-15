@@ -4,7 +4,7 @@ Plugin Name: Wp Review Bank
 Plugin URI: http://tech-banker.com
 Description: WP Review Bank helps to Create reviews! Choose from Stars, Percentages or Points for review scores with Unlimited Color Schemes.
 Author: Tech Banker
-Version: 1.9
+Version: 1.10	
 Author URI: http://tech-banker.com
  */
 
