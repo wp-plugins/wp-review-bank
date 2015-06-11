@@ -1,0 +1,60 @@
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'font-star';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1em;
+}
+ 
+.icon-star { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;'); }
+.close-report
+{
+	display: none;
+}
+div.processing_overlay 
+{
+    
+    background: url(../images/loading.gif) no-repeat scroll center center transparent;
+	display: inline-block;
+	height: 100%;
+	line-height: 1px;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	
+	left: 0;
+}
+.wp_layout_control_review_bank
+{
+	margin-top: 7px;
+}
+.layout-system-report textarea {
+    font-family: monospace;
+    width: 100%;
+    margin: 0;
+    height: 300px;
+    padding: 20px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    resize: none;
+    font-size: 12px;
+    line-height: 20px;
+    outline: 0;
+}
+.layout-system-report {
+    display: none;
+    margin: 10px 0;
+    padding: 0;
+    position: relative;
+}
+.wpib-desc-italic{
+	font-size:11px;
+	font-style:italic;
+	font-family:  "Droid Sans",Helvetica,Arial,Verdana,sans-serif;
+	margin-bottom:2px !important;
+}
+.wpib-page-width
+{
+	max-width:1000px !important;
+}
